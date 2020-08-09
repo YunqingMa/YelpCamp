@@ -15,13 +15,9 @@ const commentRoutes    = require("./routes/comments"),
       campgroundRoutes = require("./routes/campgrounds"),
       indexRoutes      = require("./routes/index");
 
-// mongoose.connect("mongodb://localhost:27017/yelp_camp", {
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true
-// })
-// .then(() => console.log('Connected to yelp_camp!'))
-// .catch(error => console.log(error.message));
-mongoose.connect("mongodb+srv://YunqingMa:Mlzjs8303030@cluster0.pxtcm.mongodb.net/yelp_camp?retryWrites=true&w=majority", {
+const url = process.env.DATABASEURL || "mongodb://localhost:27017/yelp_camp";
+
+mongoose.connect(url, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 })
@@ -34,19 +30,6 @@ app.use(bodyParser.urlencoded({extended : true}));
 app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));
 app.use(flash());
-// seedDB();
-// campground.create({
-//     name: "Great Forest",
-//     image: "https://images.pexels.com/photos/699558/pexels-photo-699558.jpeg?auto=compress&cs=tinysrgb&h=350",
-//     description: "A great forest with beautiful views"
-// }, function(err, campground){
-//     if(err){
-//         console.log(err);
-//     } else {
-//         console.log("Newly created campground:");
-//         console.log(campground);
-//     }
-// });
 
 // passport configuration
 app.use(require("express-session")({
