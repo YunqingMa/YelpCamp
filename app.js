@@ -15,12 +15,19 @@ const commentRoutes    = require("./routes/comments"),
       campgroundRoutes = require("./routes/campgrounds"),
       indexRoutes      = require("./routes/index");
 
-mongoose.connect('mongodb://localhost:27017/yelp_camp', {
+// mongoose.connect("mongodb://localhost:27017/yelp_camp", {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true
+// })
+// .then(() => console.log('Connected to yelp_camp!'))
+// .catch(error => console.log(error.message));
+mongoose.connect("mongodb+srv://YunqingMa:Mlzjs8303030@cluster0.pxtcm.mongodb.net/yelp_camp?retryWrites=true&w=majority", {
   useNewUrlParser: true,
   useUnifiedTopology: true
 })
 .then(() => console.log('Connected to yelp_camp!'))
 .catch(error => console.log(error.message));
+
 mongoose.set('useFindAndModify', false);
 app.set("view engine","ejs");
 app.use(bodyParser.urlencoded({extended : true}));
