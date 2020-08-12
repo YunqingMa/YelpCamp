@@ -13,6 +13,10 @@ router.get("/register", function(req, res){
 
 router.post("/register", function(req, res){
     let newUser = new user({username : req.body.username});
+    let secretcode = process.env.secretcode;
+    if(req.body.adminCode === secretcode){
+        newUser.isAdmin = true;
+    }
     user.register(newUser, req.body.password, function(err, user){
         if(err){
             req.flash("error", err.message);
